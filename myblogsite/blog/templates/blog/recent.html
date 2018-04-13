@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Recent | {{ block.super }}{% endblock %}
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+            <h3 class="pb-3 mb-4 font-italic border-bottom">Recent blog posts</h3>
+            {% for post in object_list %}
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{ post.title }}</h2>
+                <p class="blog-post-meta">{{ post.publish }} <a href="#">{{ post.author|capfirst }}</a></p>
+                <hr>
+            </div>
+            {% empty %}
+            <div class="blog-post"><h2 class="blog-post-title">No blog posts yet!</h2></div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
