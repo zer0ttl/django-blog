@@ -4,6 +4,7 @@ from django.utils import timezone
 from .models import Post
 # Create your views here.
 
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/recent.html'
@@ -19,4 +20,5 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['cardsummary'] = self.object.summary[:20]
         return context

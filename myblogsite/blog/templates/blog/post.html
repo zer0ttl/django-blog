@@ -6,7 +6,12 @@
     <p class="blog-post-meta">{{ object.publish }} by <a href="#">{{ object.author|capfirst }}</a></p>
     <p class="blog-post-summary">{{ object.summary }}</p>
     <hr>
-    <p>{{ object.body }}</p>
-    <p class="blog-post-meta">Last updated at {{ object.updated_at }} by <a href="#">{{ object.author|capfirst }}</a></p>
+    <p>{{ object.body|linebreaks }}</p>
+    <p class="blog-post-meta">{{ object.publish|timesince:object.updated_at }} since last update by <a href="#">{{ object.author|capfirst }}</a></p>
+    <div class="row-md-4">
+        {% for tag in object.tags.all|dictsort:"tag_name" %}
+        <strong class="badge badge-info">{{ tag|capfirst }}</strong>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

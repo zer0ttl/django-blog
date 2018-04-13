@@ -4,9 +4,13 @@ from . import models
 # Register your models here.
 
 
+class TagInline(admin.TabularInline):
+    model = models.Post
+
+
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'author', 'publish', 'status')
-    list_filter = ('status', 'created_at', 'publish', 'author')
+    list_display = ('title', 'tag_list', 'author', 'publish', 'status')
+    list_filter = ('status', 'created_at', 'publish', 'author', 'tags')
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
@@ -14,5 +18,10 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
 
 
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(models.Tag, TagAdmin)
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Post, PostAdmin)
