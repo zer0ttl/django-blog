@@ -6,6 +6,7 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
+    alias = models.CharField(max_length=100)
     pass
 
 
@@ -23,6 +24,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS_CHOICES, default=5)
+    summary = models.TextField(default='')
 
     class Meta:
         ordering = ('-publish',)
