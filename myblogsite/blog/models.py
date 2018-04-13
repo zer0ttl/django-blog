@@ -22,7 +22,7 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=10, default=5)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=5)
 
     class Meta:
         ordering = ('-publish',)
