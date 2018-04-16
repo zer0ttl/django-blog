@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.utils import timezone
 from .models import Post
+from django.urls import reverse_lazy
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 # Create your views here.
 
 
@@ -22,3 +24,9 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['cardsummary'] = self.object.summary[:20]
         return context
+
+
+class SignUpView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'

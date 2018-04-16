@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . import models
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 # Register your models here.
 
 
@@ -22,6 +23,12 @@ class TagAdmin(admin.ModelAdmin):
     pass
 
 
+class CustomUserAdmin(UserAdmin):
+    model = models.User
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+
+
 admin.site.register(models.Tag, TagAdmin)
-admin.site.register(models.User, UserAdmin)
+admin.site.register(models.User, CustomUserAdmin)
 admin.site.register(models.Post, PostAdmin)
